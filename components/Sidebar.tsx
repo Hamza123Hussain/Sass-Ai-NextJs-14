@@ -1,5 +1,7 @@
+'use client'
 import { Icon, LayoutDashboard, LayoutDashboardIcon } from 'lucide-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import React from 'react'
 
 const routes = [
@@ -42,6 +44,7 @@ const routes = [
 ]
 
 const Sidebar = () => {
+  const pathname = usePathname()
   return (
     <div className=" flex flex-col h-full py-4 space-y-4 text-white bg-slate-400 ">
       <div className=" px-1 py-2 flex-1">
@@ -59,7 +62,14 @@ const Sidebar = () => {
               <div key={ele.id}>
                 <Link href={ele.href} className=" flex gap-5 items-center">
                   <img className=" w-10" src={ele.Icon} alt="" />
-                  <h3 className=" text-sm"> {ele.label}</h3>
+                  <h3
+                    className={`text-sm ${
+                      pathname == ele.href ? 'text-green-400' : 'text-zinc-500'
+                    }`}
+                  >
+                    {' '}
+                    {ele.label}
+                  </h3>
                 </Link>
               </div>
             )
