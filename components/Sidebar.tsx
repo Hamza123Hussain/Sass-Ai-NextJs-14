@@ -43,7 +43,7 @@ const routes = [
 
 const Sidebar = () => {
   return (
-    <div className=" flex flex-col h-full py-4 space-y-4 text-white ">
+    <div className=" flex flex-col h-full py-4 space-y-4 text-white bg-slate-400 ">
       <div className=" px-1 py-2 flex-1">
         <Link
           href={'/dashboard'}
