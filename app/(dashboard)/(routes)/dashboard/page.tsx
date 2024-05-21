@@ -5,9 +5,8 @@ import React from 'react'
 const page = () => {
   return (
     <div>
+      I am CONTNENT
       <Button value={'hello'} variant={'destructive'} />
-
-      <UserButton />
     </div>
   )
 }
