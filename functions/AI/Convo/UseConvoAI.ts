@@ -15,7 +15,7 @@ export const CallAi = async (
 
     if (response.status === 200) {
       // Handle the successful response
-      console.log('RESPONSE FROM AI:', response.data)
+      // console.log('RESPONSE FROM AI:', response.data)
       return response.data // Return data to be used in the calling context
     } else {
       // Handle unexpected status codes
