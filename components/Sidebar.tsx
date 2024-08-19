@@ -10,7 +10,7 @@ const Sidebar = () => {
   const pathname = usePathname()
 
   return (
-    <div className=" flex flex-col    text-white min-h-screen bg-slate-900 justify-between py-2 ">
+    <div className=" flex flex-col border-r-2 border-slate-700    text-white min-h-screen bg-slate-900 justify-between py-2 ">
       <Link
         href={'/dashboard'}
         className=" flex  items-center justify-center  gap-2 "
@@ -26,7 +26,7 @@ const Sidebar = () => {
               <Link href={ele.href} className=" flex gap-5 items-center">
                 <img className=" w-10" src={ele.Icon} alt="" />
                 <h3
-                  className={`text-[8px] ${
+                  className={`text-[12px] ${
                     pathname == ele.href ? 'text-green-400' : 'text-white'
                   }`}
                 >
