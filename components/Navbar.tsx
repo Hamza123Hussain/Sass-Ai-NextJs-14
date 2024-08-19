@@ -6,7 +6,6 @@ const Navbar = () => {
   return (
     <div className=" flex items-center p-2 md:hidden">
       <MobileSideBar />
-      <div className=" flex w-full justify-end"></div>
     </div>
   )
 }
