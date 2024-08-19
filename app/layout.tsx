@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { ClerkProvider } from '@clerk/nextjs'
-import Sidebar from '@/components/Sidebar'
-import Navbar from '@/components/Navbar'
+
+import ConditionalLayout from '@/components/ConditionalLayout'
+import { Toaster } from 'react-hot-toast'
+import ContextProvider from '@/utils/Context'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,19 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {' '}
-        <div className="h-full relative ">
-          <div className=" hidden h-full md:flex md:w-48  md:flex-col md:fixed md:inset-y-0 z-[80] bg-slate-400 ">
-            <div className=" text-green-500">
-              <Sidebar />
-            </div>
-          </div>
-
-          <main className=" md:pl-52">
-            <Navbar />
-            {children}
-          </main>
-        </div>
+        <ContextProvider>
+          <ConditionalLayout>
+            {children} <Toaster />
+          </ConditionalLayout>
+        </ContextProvider>
       </body>
     </html>
   )
