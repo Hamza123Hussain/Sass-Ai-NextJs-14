@@ -149,3 +149,50 @@
     opacity: 1;
   }
 }
+/* Conversation.css */
+.conversation-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full height of the viewport */
+}
+
+.messages-list {
+  flex: 1; /* Takes up the remaining space */
+  overflow-y: auto; /* Allows scrolling if messages exceed the viewport height */
+  padding: 10px;
+  border-bottom: 1px solid #ddd; /* Optional border for separation */
+}
+
+.message {
+  padding: 5px;
+  border-bottom: 1px solid #eee; /* Optional border for messages */
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-top: 1px solid #ddd; /* Optional border for separation */
+  background-color: #f9f9f9; /* Optional background color */
+}
+
+.input-container input {
+  flex: 1;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.input-container button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #0070f3;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.input-container button:hover {
+  background-color: #005bb5;
+}
