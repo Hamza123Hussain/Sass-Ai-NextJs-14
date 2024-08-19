@@ -4,6 +4,7 @@ import { InputValues } from './SignupInterface'
 import { Message } from './MessageInterface'
 import { CallAi } from '@/functions/AI/Convo/UseConvoAI'
 import { GetSummaryFromAI } from '@/functions/AI/Summary/SummaryAI'
+import { GetHashTagsFromAI } from '@/functions/AI/HashTag/HashTagGenerator'
 
 export const UserContext = createContext<any>(null)
 
@@ -43,7 +44,15 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
       return {} // Fallback to empty object
     }
   })
-
+  const [HashTagmessages, setHashtagMessages] = useState<Message[]>(() => {
+    try {
+      const storedData = localStorage.getItem('AIHashTagMessages')
+      return storedData ? JSON.parse(storedData) : [] // Initialize with empty array
+    } catch (error) {
+      console.error('Failed to parse messages from localStorage:', error)
+      return [] // Fallback to empty array
+    }
+  })
   useEffect(() => {
     // Save userData to local storage whenever it changes
     try {
@@ -68,6 +77,14 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
       console.error('Failed to save messages to localStorage:', error)
     }
   }, [Summarymessages])
+  useEffect(() => {
+    // Save messages to local storage whenever messages change
+    try {
+      localStorage.setItem('AIHashTagMessages', JSON.stringify(HashTagmessages))
+    } catch (error) {
+      console.error('Failed to save messages to localStorage:', error)
+    }
+  }, [HashTagmessages])
   const handleSend = async (inputValue: string, setInputValue: any) => {
     if (inputValue.trim()) {
       try {
@@ -110,6 +127,32 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
       }
     }
   }
+  const handleHASHtags = async () => {
+    if (inputValue.trim()) {
+      try {
+        setLoading(true)
+        const Data = await GetHashTagsFromAI(
+          inputValue,
+          userData.email,
+          userData.Name
+        )
+        if (Data) {
+          setHashtagMessages((prev: Message[]) => [
+            ...prev,
+            Data.Human,
+            Data.AI,
+          ])
+          // console.log('DATA : ', Data.AI)
+          setInputValue('')
+          setLoading(false)
+        }
+      } catch (error) {
+        console.error('Error Summarying message:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+  }
   return (
     <UserContext.Provider
       value={{
@@ -126,6 +169,8 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
         Summarymessages,
         handleSummary,
         handleSend,
+        HashTagmessages,
+        handleHASHtags,
       }}
     >
       {children}
