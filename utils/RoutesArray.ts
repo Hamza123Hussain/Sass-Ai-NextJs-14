@@ -8,7 +8,7 @@ export const routes = [
   {
     id: 2,
     label: 'Conversation',
-    Icon: '360_F_500526719_3viiy0ih3f5d85kYlQJ8IsNwNzhUiPVK-removebg-preview.png',
+    Icon: 'https://cdn-icons-png.flaticon.com/512/16/16021.png',
     href: '/Conversation',
   },
   {
@@ -25,14 +25,26 @@ export const routes = [
   },
   {
     id: 5,
-    label: 'Music Choice Generator',
+    label: 'Music Suggestion Generator',
     Icon: 'https://static.thenounproject.com/png/6708663-200.png',
     href: '/MusicGeneration',
   },
   {
     id: 6,
+    label: 'Movie Suggestion Generator',
+    Icon: 'https://icons.veryicon.com/png/o/internet--web/common-icons-for-web-pages/78-movie-camera.png',
+    href: '/MusicGeneration',
+  },
+  {
+    id: 7,
     label: 'Code Generation',
-    Icon: 'https://icons.veryicon.com/png/o/miscellaneous/programming-software-icons/generate-code.png',
+    Icon: 'https://simpleicon.com/wp-content/uploads/Code-Optimization.png',
+    href: '/CodeGeneration',
+  },
+  {
+    id: 8,
+    label: 'Content Editor',
+    Icon: 'https://static.thenounproject.com/png/4948249-200.png',
     href: '/CodeGeneration',
   },
 ]
