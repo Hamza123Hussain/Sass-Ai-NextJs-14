@@ -1,6 +1,6 @@
 export interface Message {
   MessageID: any
-  Conversation: string
+  Conversation: any
   UserEmail: string
   UserID: string
 }
