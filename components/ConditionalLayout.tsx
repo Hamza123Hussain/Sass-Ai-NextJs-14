@@ -1,12 +1,10 @@
 'use client'
 import React, { ReactNode, useContext, useEffect, useState } from 'react'
 import { UserContext } from '@/utils/Context'
-import { Toaster } from 'react-hot-toast'
 import { usePathname } from 'next/navigation'
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
 import NoAuthNavbar from './NoAuthNavbar'
-import Conversation from '@/app/(dashboard)/(routes)/Conversation/page'
 import Login from '@/app/login/page'
 
 const ConditionalLayout = ({ children }: { children: ReactNode }) => {
@@ -33,28 +31,33 @@ const ConditionalLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       {userData ? (
-        <div className="h-full relative ">
-          <div className=" hidden h-full md:flex md:w-48  md:flex-col md:fixed md:inset-y-0 z-[80] bg-slate-400 ">
-            <div className=" text-green-500">
-              <Sidebar />
-            </div>
+        <div className="flex h-screen">
+          {/* Sidebar */}
+          <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:top-0 md:left-0 md:h-full bg-slate-800 text-white">
+            <Sidebar />
           </div>
 
-          <main className=" md:pl-52">
+          <div className="flex-1 flex flex-col md:ml-64">
             <Navbar />
+            <main className="flex-1 overflow-y-auto bg-gray-100 ">
+              {children}
+            </main>
+          </div>
+        </div>
+      ) : isAuthPage ? (
+        <div className="flex flex-col h-screen">
+          <NoAuthNavbar />
+          <main className="flex-1 overflow-y-auto bg-gray-100 p-4">
             {children}
           </main>
         </div>
-      ) : isAuthPage ? (
-        <main className="flex-grow flex flex-col">
-          <NoAuthNavbar />
-          {children}
-        </main>
       ) : (
-        <main className="flex-grow flex flex-col">
+        <div className="flex flex-col h-screen">
           <NoAuthNavbar />
-          <Login />
-        </main>
+          <main className="flex-1 overflow-y-auto bg-gray-100 p-4">
+            <Login />
+          </main>
+        </div>
       )}
     </>
   )
