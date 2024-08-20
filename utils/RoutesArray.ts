@@ -33,7 +33,7 @@ export const routes = [
     id: 6,
     label: 'Movie Suggestion Generator',
     Icon: 'https://icons.veryicon.com/png/o/internet--web/common-icons-for-web-pages/78-movie-camera.png',
-    href: '/MusicGeneration',
+    href: '/Moviegneration',
   },
   {
     id: 7,
