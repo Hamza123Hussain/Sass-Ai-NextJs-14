@@ -6,6 +6,7 @@ import { CallAi } from '@/functions/AI/Convo/UseConvoAI'
 import { GetSummaryFromAI } from '@/functions/AI/Summary/SummaryAI'
 import { GetHashTagsFromAI } from '@/functions/AI/HashTag/HashTagGenerator'
 import { GetMusicSuggestionFromAI } from '@/functions/AI/Music/GetMusicSuggestion'
+import { GetMovieSuggestionFromAI } from '@/functions/AI/Movie/GetMovieSuggestion'
 
 export const UserContext = createContext<any>(null)
 
@@ -39,6 +40,16 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
   const [MusicSuggest, setMusicMessages] = useState<Message[]>(() => {
     try {
       const storedData = localStorage.getItem('AIMusicMessages')
+      return storedData ? JSON.parse(storedData) : [] // Initialize with empty array
+    } catch (error) {
+      console.error('Failed to parse messages from localStorage:', error)
+      return [] // Fallback to empty array
+    }
+  })
+
+  const [MovieSuggest, setMovieMessages] = useState<Message[]>(() => {
+    try {
+      const storedData = localStorage.getItem('AIMovieMessages')
       return storedData ? JSON.parse(storedData) : [] // Initialize with empty array
     } catch (error) {
       console.error('Failed to parse messages from localStorage:', error)
@@ -103,6 +114,14 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
       console.error('Failed to save messages to localStorage:', error)
     }
   }, [MusicSuggest])
+  useEffect(() => {
+    // Save messages to local storage whenever messages change
+    try {
+      localStorage.setItem('AIMovieMessages', JSON.stringify(MovieSuggest))
+    } catch (error) {
+      console.error('Failed to save messages to localStorage:', error)
+    }
+  }, [MovieSuggest])
   const handleSend = async (inputValue: string, setInputValue: any) => {
     if (inputValue.trim()) {
       try {
@@ -195,6 +214,30 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
       }
     }
   }
+
+  const handleMovie = async () => {
+    if (inputValue.trim()) {
+      try {
+        setLoading(true)
+        const Data = await GetMovieSuggestionFromAI(
+          inputValue,
+          userData.email,
+          userData.Name
+        )
+        if (Data) {
+          // console.log('DATA : ', Data)
+          setMovieMessages((prev: Message[]) => [...prev, Data.Human, Data.AI])
+
+          setInputValue('')
+          setLoading(false)
+        }
+      } catch (error) {
+        console.error('Error Summarying message:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+  }
   return (
     <UserContext.Provider
       value={{
@@ -214,6 +257,8 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
         HashTagmessages,
         handleHASHtags,
         handleMusic,
+        handleMovie,
+        MovieSuggest,
         MusicSuggest,
       }}
     >
