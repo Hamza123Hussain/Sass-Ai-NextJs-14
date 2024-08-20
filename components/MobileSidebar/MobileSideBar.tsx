@@ -8,8 +8,9 @@ const MobileSideBar = () => {
   return (
     <Sheet>
       <SheetTrigger>
-        <div className=" bg-gray-100  p-2">
+        <div className=" text-white  p-2 flex items-center gap-2">
           <Menu />
+          <h1 className=" font-bold text-xl">Quick Suggest</h1>
         </div>
       </SheetTrigger>
 
