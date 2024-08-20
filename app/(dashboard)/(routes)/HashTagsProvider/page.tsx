@@ -44,7 +44,7 @@ const HashTagProvider = () => {
             onClick={handleHASHtags}
             className="p-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
-            Generate Summary
+            Generate HashTags
           </button>
         </div>
       </div>
