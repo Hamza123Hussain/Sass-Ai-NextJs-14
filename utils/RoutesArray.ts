@@ -45,6 +45,6 @@ export const routes = [
     id: 8,
     label: 'Content Editor',
     Icon: 'https://static.thenounproject.com/png/4948249-200.png',
-    href: '/CodeGeneration',
+    href: '/ContentEditing',
   },
 ]
