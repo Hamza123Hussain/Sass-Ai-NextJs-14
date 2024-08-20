@@ -7,6 +7,7 @@ import { GetSummaryFromAI } from '@/functions/AI/Summary/SummaryAI'
 import { GetHashTagsFromAI } from '@/functions/AI/HashTag/HashTagGenerator'
 import { GetMusicSuggestionFromAI } from '@/functions/AI/Music/GetMusicSuggestion'
 import { GetMovieSuggestionFromAI } from '@/functions/AI/Movie/GetMovieSuggestion'
+import { GetGrammarFromAI } from '@/functions/AI/Grammar/GetGrammar'
 
 export const UserContext = createContext<any>(null)
 
@@ -17,6 +18,7 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
     Name: '',
     Image: null,
   })
+  /**Setting States */
   const [inputValue, setInputValue] = useState('')
   const [loading, setLoading] = useState(false) // Start with loading true
   const [messages, setMessages] = useState<Message[]>(() => {
@@ -74,6 +76,17 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
       return [] // Fallback to empty array
     }
   })
+
+  const [Grammar, setGrammar] = useState<Message[]>(() => {
+    try {
+      const storedData = localStorage.getItem('AIGrammarMessages')
+      return storedData ? JSON.parse(storedData) : [] // Initialize with empty array
+    } catch (error) {
+      console.error('Failed to parse messages from localStorage:', error)
+      return [] // Fallback to empty array
+    }
+  })
+  /**use effect for the states */
   useEffect(() => {
     // Save userData to local storage whenever it changes
     try {
@@ -122,6 +135,15 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
       console.error('Failed to save messages to localStorage:', error)
     }
   }, [MovieSuggest])
+  useEffect(() => {
+    // Save messages to local storage whenever messages change
+    try {
+      localStorage.setItem('AIGrammarMessages', JSON.stringify(Grammar))
+    } catch (error) {
+      console.error('Failed to save messages to localStorage:', error)
+    }
+  }, [Grammar])
+  /**Get Functions */
   const handleSend = async (inputValue: string, setInputValue: any) => {
     if (inputValue.trim()) {
       try {
@@ -238,6 +260,29 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
       }
     }
   }
+  const handleGrammar = async () => {
+    if (inputValue.trim()) {
+      try {
+        setLoading(true)
+        const Data = await GetGrammarFromAI(
+          inputValue,
+          userData.email,
+          userData.Name
+        )
+        if (Data) {
+          console.log('DATA : ', Data)
+          setGrammar((prev: Message[]) => [...prev, Data.Human, Data.AI])
+
+          setInputValue('')
+          setLoading(false)
+        }
+      } catch (error) {
+        console.error('Error Summarying message:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+  }
   return (
     <UserContext.Provider
       value={{
@@ -260,6 +305,8 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
         handleMovie,
         MovieSuggest,
         MusicSuggest,
+        handleGrammar,
+        Grammar,
       }}
     >
       {children}
