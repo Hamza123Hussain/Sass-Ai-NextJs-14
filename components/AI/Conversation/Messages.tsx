@@ -30,7 +30,11 @@ const MessageCard = ({
           <div>{message.Conversation}</div>
         )}
       </div>
-      <h1 className="text-sm mt-1">
+      <h1
+        className={`text-sm mt-1 font-extrabold ${
+          message.UserEmail === userData.email ? 'bg-white' : 'bg-green-400'
+        }  text-transparent bg-clip-text`}
+      >
         {message.UserEmail === userData.email ? userData.Name : 'Gemni AI'}
       </h1>
     </div>
