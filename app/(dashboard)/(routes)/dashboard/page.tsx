@@ -8,18 +8,14 @@ import Link from 'next/link'
 const DashBoard = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold mb-8 flex items-center gap-2">
-        Welcome to{' '}
-        <Link
-          href={'/dashboard'}
-          className=" flex  items-center justify-center  gap-2 "
-        >
-          <LayoutDashboard />
+      <Link
+        href={'/dashboard'}
+        className=" flex  items-center justify-center  gap-2 my-4 "
+      >
+        <LayoutDashboard />
 
-          <h1 className=" font-bold text-2xl">Quick Suggest</h1>
-        </Link>{' '}
-      </h1>
-
+        <h1 className=" font-bold text-2xl">Quick Suggest</h1>
+      </Link>{' '}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         {routes.map(({ id, label, Icon, href }) => (
           <a
