@@ -1,10 +1,10 @@
 export const routes = [
-  {
-    id: 1,
-    label: 'Dashboard',
-    Icon: 'https://cdn.iconscout.com/icon/premium/png-256-thumb/dashboard-1888158-1599936.png?f=webp',
-    href: '/dashboard',
-  },
+  // {
+  //   id: 1,
+  //   label: 'Dashboard',
+  //   Icon: 'https://cdn.iconscout.com/icon/premium/png-256-thumb/dashboard-1888158-1599936.png?f=webp',
+  //   href: '/dashboard',
+  // },
   {
     id: 2,
     label: 'Conversation',
@@ -35,12 +35,12 @@ export const routes = [
     Icon: 'https://icons.veryicon.com/png/o/internet--web/common-icons-for-web-pages/78-movie-camera.png',
     href: '/Moviegneration',
   },
-  {
-    id: 7,
-    label: 'Code Generation',
-    Icon: 'https://simpleicon.com/wp-content/uploads/Code-Optimization.png',
-    href: '/CodeGeneration',
-  },
+  // {
+  //   id: 7,
+  //   label: 'Code Generation',
+  //   Icon: 'https://simpleicon.com/wp-content/uploads/Code-Optimization.png',
+  //   href: '/CodeGeneration',
+  // },
   {
     id: 8,
     label: 'Content Editor',
