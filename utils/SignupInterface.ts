@@ -4,4 +4,4 @@ export interface InputValues {
   Name: string
   Image: File | null
 }
-export const APIURL = 'https://backend-sass-ai.vercel.app/'
+export const APIURL = 'https://backend-sass-ai.vercel.app'

@@ -47,7 +47,7 @@ const SignUpTextFields = () => {
         className="mb-3 p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
 
-      <FileField onChange={handleChange} Text="Add A Profile Image" />
+      {/* <FileField onChange={handleChange} Text="Add A Profile Image" /> */}
     </>
   )
 }
