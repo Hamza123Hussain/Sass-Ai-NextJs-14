@@ -13,13 +13,13 @@ const ShowingUser = () => {
   return (
     <div className=" flex flex-col items-center gap-2">
       <div className=" flex gap-2 items-center">
-        <img
+        {/* <img
           src="https://www.hindustantimes.com/web-stories/hania-aamirs-note-worthy-ethnic-looks-_NIQlE3VcFMqP0zB05EX/assets/20.jpeg"
           width={20}
           height={20}
           className=" rounded-full"
           alt="image"
-        />
+        /> */}
         <h1 className=" font-bold text-sm">{userData.Name} </h1>
       </div>
       <button
